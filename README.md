@@ -21,7 +21,7 @@ on **RHEL 8.10 (or Rocky/Alma)** servers **without internet access**, using **An
 
 Download the following RPMs from [https://packages.clickhouse.com/rpm/stable/](https://packages.clickhouse.com/rpm/stable/):
 
-```bash
+```
 mkdir -p /data/ansible/clickhouse24.8.2.3
 cd /data/ansible/clickhouse24.8.2.3
 
@@ -30,9 +30,11 @@ wget https://packages.clickhouse.com/rpm/stable/clickhouse-server-24.8.2.3.x86_6
 wget https://packages.clickhouse.com/rpm/stable/clickhouse-client-24.8.2.3.x86_64.rpm
 # Optional standalone binary
 #wget https://packages.clickhouse.com/rpm/stable/clickhouse-keeper-24.8.2.3.x86_64.rpm
+```
 
 Then transfer this directory to your offline Ansible control node:
 /data/ansible/clickhouse24.8.2.3/
+
 
 ## ⚙️ Step 2: Create the Ansible Inventory
 /data/ansible/inventory.ini
@@ -117,6 +119,7 @@ Create /data/ansible/templates/keeper.xml.j2:
 
 Add this task after installation:
 
+```
     - name: Deploy ClickHouse Keeper config
       template:
         src: templates/keeper.xml.j2
@@ -129,6 +132,7 @@ Add this task after installation:
       systemd:
         name: clickhouse-server
         state: restarted
+```
 
 ## ▶️ Step 5: Run the Playbook
 
