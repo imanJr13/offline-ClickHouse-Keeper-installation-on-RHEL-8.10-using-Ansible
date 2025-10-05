@@ -34,17 +34,20 @@ wget https://packages.clickhouse.com/rpm/stable/clickhouse-client-24.8.2.3.x86_6
 Then transfer this directory to your offline Ansible control node:
 /data/ansible/clickhouse24.8.2.3/
 
-⚙️ Step 2: Create the Ansible Inventory
+## ⚙️ Step 2: Create the Ansible Inventory
 /data/ansible/inventory.ini
 
+```
 [clickhouse]
 ch-node1 ansible_host=10.0.0.101
 # ch-node2 ansible_host=10.0.0.102
 # ch-node3 ansible_host=10.0.0.103
 
-🧰 Step 3: Create the Playbook
+```
+## 🧰 Step 3: Create the Playbook
 /data/ansible/install_clickhouse.yml
 
+```
 ---
 - name: Offline install ClickHouse + Keeper
   hosts: clickhouse
@@ -85,9 +88,12 @@ ch-node1 ansible_host=10.0.0.101
     - debug:
         msg: "ClickHouse version: {{ ch_ver.stdout }}"
 
+```
 
-🧱 Step 4: (Optional) Configure ClickHouse Keeper
+## 🧱 Step 4: (Optional) Configure ClickHouse Keeper
 Create /data/ansible/templates/keeper.xml.j2:
+
+```
 
 <clickhouse>
   <keeper_server>
@@ -107,7 +113,7 @@ Create /data/ansible/templates/keeper.xml.j2:
     </raft_configuration>
   </keeper_server>
 </clickhouse>
-
+```
 
 Add this task after installation:
 
@@ -124,8 +130,9 @@ Add this task after installation:
         name: clickhouse-server
         state: restarted
 
-▶️ Step 5: Run the Playbook
+## ▶️ Step 5: Run the Playbook
 
+```
 cd /data/ansible
 ansible-playbook -i inventory.ini install_clickhouse.yml
 
@@ -139,6 +146,7 @@ clickhouse-client --query "SELECT version();"
 If Keeper is enabled:
 clickhouse-keeper-client --host localhost --port 9181
 
+```
 
 🧠 Notes
 
