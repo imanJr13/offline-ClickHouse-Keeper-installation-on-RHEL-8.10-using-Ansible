@@ -164,17 +164,18 @@ Uses only native yum and systemd tools
 
 🏁 Example Output
 
+```
 TASK [Verify ClickHouse installation] ******************************************
 ok: [ch-node1]
 TASK [debug] *******************************************************************
 ok: [ch-node1] => {
     "msg": "ClickHouse version: 24.8.2.3"
 }
-
+```
 
 💬 Author
 
-Created by {{ your name }}
+Created by Iman Jafari
 Inspired by real-world offline deployment in air-gapped environments.
 
 <a href="https://www.coffeebede.com/imanjr"><img class="img-fluid" src="https://coffeebede.ir/DashboardTemplateV2/app-assets/images/banner/default-yellow.svg" /></a>
